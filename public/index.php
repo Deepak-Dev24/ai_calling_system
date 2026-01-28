@@ -15,7 +15,7 @@
 <h1 class="m-5">Call Records</h1>
 
 <!-- Summary Cards -->
-<div class="grid grid-cols-4 gap-4 mb-6">
+<div class="grid grid-cols-5 gap-4 mb-6">
   <div class="bg-white p-4 rounded shadow">
     <p class="text-sm text-gray-500">Total Calls</p>
     <p class="text-2xl font-bold" id="totalCalls">0</p>
@@ -35,6 +35,23 @@
     <p class="text-sm text-gray-500">Answer Rate</p>
     <p class="text-2xl font-bold" id="answerRate">0%</p>
   </div>
+  <div class="bg-white p-4 rounded shadow">
+  <p class="text-sm text-gray-500">Total Bill</p>
+
+  <p class="text-2xl font-bold text-red-600" id="totalBill">₹0</p>
+
+  <p class="text-sm text-gray-600 mt-1">
+    <span id="totalMinutes">0</span> minutes used
+  </p>
+
+  <button
+    onclick="clearBill()"
+    class="mt-2 text-sm bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">
+    Pay / Clear
+  </button>
+</div>
+ 
+
 </div>
 
 <!-- Search + Actions -->
@@ -88,6 +105,6 @@
 </div>
 </div>
 
-<script src="function.js?v=1" ></script>
+<script src="function.js?v=<?= time() ?>"></script>
 </body>
 </html>

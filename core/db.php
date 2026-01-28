@@ -1,14 +1,20 @@
 <?php
-$DB_HOST = "localhost";
-$DB_USER = "root";
-$DB_PASS = "";          // put your MySQL password if any
-$DB_NAME = "call_billing";
+$host = "localhost";
+$db   = "call_billing";
+$user = "root";
+$pass = "";
 
-$conn = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
-
-if ($conn->connect_error) {
-    die("Database connection failed: " . $conn->connect_error);
+try {
+  $pdo = new PDO(
+    "mysql:host=$host;dbname=$db;charset=utf8mb4",
+    $user,
+    $pass,
+    [
+      PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+    ]
+  );
+} catch (Exception $e) {
+  die("Database connection failed");
 }
-
-// Optional: set strict mode (recommended)
-$conn->set_charset("utf8mb4");
+?>

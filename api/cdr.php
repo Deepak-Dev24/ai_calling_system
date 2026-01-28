@@ -76,3 +76,4 @@ echo json_encode([
   "hasNext" => $cdrJson['pagination']['has_next'] ?? false,
   "data"    => $data
 ]);
+?>

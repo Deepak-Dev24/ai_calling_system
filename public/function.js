@@ -76,6 +76,28 @@ function updateMetrics(calls) {
       ? Math.round((answered.length / calls.length) * 100) + "%"
       : "0%";
 }
+// ===== BILLING =====
+async function loadBilling() {
+  try {
+    const res = await fetch("../api/billing_summary.php");
+    const bill = await res.json();
+
+    const billEl = document.getElementById("totalBill");
+    const minutesEl = document.getElementById("totalMinutes");
+
+    if (billEl) {
+      billEl.innerText = "₹" + (bill.total_amount || 0);
+    }
+
+    if (minutesEl) {
+      minutesEl.innerText = bill.total_minutes || 0;
+    }
+
+  } catch (e) {
+    console.error("Billing load failed", e);
+  }
+}
+
 // ===== TABLE =====
 function renderTable(calls) {
   const tbody = document.getElementById("tableBody");
@@ -171,9 +193,32 @@ function exportCSV() {
   URL.revokeObjectURL(url);
 }
 
+async function clearBill() {
+  if (!confirm("Are you sure you want to clear the bill?")) return;
+
+  try {
+    const res = await fetch("../api/clear_bill.php", {
+      method: "POST"
+    });
+    const json = await res.json();
+
+    alert(json.message || "Bill cleared");
+
+    // Reload billing after clearing
+    loadBilling();
+
+  } catch (e) {
+    alert("Failed to clear bill");
+    console.error(e);
+  }
+}
+
 
 // ===== INIT =====
+
 loadCDR();
+loadBilling();
+
 function loadMore() {
   PAGE++;
   loadCDR();

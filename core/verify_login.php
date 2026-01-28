@@ -30,7 +30,7 @@ if (
 
 } else {
     $_SESSION['attempts']++;
-    header("Location: login.php");
+    header("Location: ../public/login.php");
     exit;
 }
 ?>
