@@ -1,17 +1,24 @@
 <?php
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);     // hide errors in production
 error_reporting(E_ALL);
 
 date_default_timezone_set('Asia/Kolkata');
 
-require_once __DIR__ . '/../../core/session_secure.php';
-require_once __DIR__ . '/../../core/auth.php';
+/* Detect cron (CLI execution) */
+$isCron = php_sapi_name() === 'cli';
+
+/* Load auth only for browser access */
+if (!$isCron) {
+    require_once __DIR__ . '/../../core/session_secure.php';
+    require_once __DIR__ . '/../../core/auth.php';
+}
+
+/* Always required */
 require_once __DIR__ . '/../../core/db.php';
 require_once __DIR__ . '/../../api/vobiz_cdr_fetch.php';
 
 header('Content-Type: application/json');
-
-$userId = $_SESSION['user_id'] ?? 1;
+$userId = $isCron ? 1 : ($_SESSION['user_id'] ?? 1);
 $rate   = 3;
 $rows   = 0;
 
