@@ -118,9 +118,11 @@ sudo nano /etc/nginx/sites-available/ai_calling_system
 
 Paste **exactly this**:
 
+Update this one...
+
 server {
     listen 80;
-    server_name ai-calling.local;
+    server_name _;
 
     root /var/www/ai_calling_system/public;
     index index.php index.html;
