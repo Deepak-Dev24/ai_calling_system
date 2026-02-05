@@ -22,7 +22,7 @@
 ```bash
 sudo apt update && sudo apt upgrade -y
 ```
-
+`
 ---
 
 ### 2️⃣ Install NGINX
@@ -123,7 +123,6 @@ Update this one...
 server {
     listen 80;
     server_name _;
-
     root /var/www/ai_calling_system/public;
     index index.php index.html;
 
@@ -132,16 +131,13 @@ server {
     location / {
         try_files $uri $uri/ /index.php?$query_string;
     }
-
     location ~ \.php$ {
         include snippets/fastcgi-php.conf;
         fastcgi_pass unix:/run/php/php8.1-fpm.sock;
     }
-
     location ~ /\. {
         deny all;
     }
-
     error_log /var/log/nginx/ai_calling_error.log;
     access_log /var/log/nginx/ai_calling_access.log;
 }
