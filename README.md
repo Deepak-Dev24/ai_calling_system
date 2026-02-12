@@ -213,6 +213,9 @@ mkdir database     ->/////now add db at this location
 ```bash
 
 mysql -u aiuser -p call_billing < /var/www/database/call_billing.sql
+or
+ubuntu@ubuntu-fresh:/var/www/ai_calling_system$ mysql -u aiuser -p call_billing < call_billingnew.sql
+
 
 ```
 
